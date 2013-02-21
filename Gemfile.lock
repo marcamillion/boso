@@ -93,6 +93,7 @@ GEM
     multi_json (1.6.1)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
+    pg (0.14.1)
     polyglot (0.3.3)
     quiet_assets (1.0.1)
       railties (~> 3.1)
@@ -144,6 +145,7 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
+    serel (1.0.1)
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -187,11 +189,13 @@ DEPENDENCIES
   email_spec (>= 1.4.0)
   figaro (>= 0.5.3)
   jquery-rails
+  pg
   quiet_assets (>= 1.0.1)
   rails (= 3.2.12)
   rolify (>= 3.2.0)
   rspec-rails (>= 2.12.2)
   sass-rails (~> 3.2.3)
+  serel
   simple_form (>= 2.0.4)
   sqlite3
   thin (>= 1.5.0)

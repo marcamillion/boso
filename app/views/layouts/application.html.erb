@@ -10,26 +10,25 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-    <header class="navbar navbar-fixed-top">
-      <nav class="navbar-inner">
-        <div class="container">
-          <%= render 'layouts/navigation' %>
+      <div class="container-narrow">
+        <div class="masthead">
+	          <%= render 'layouts/navigation' %>
+          <h3 class="muted"><%= link_to "BOSO", root_path, :class => 'brand' %></h3>
         </div>
-      </nav>
-    </header>
-    <div id="main" role="main">
-      <div class="container">
-        <div class="content">
-           <div class="row">
-            <div class="span12">
-              <%= render 'layouts/messages' %>
-              <%= yield %>
-            </div>
-          </div>
-          <footer>
-          </footer>
+
+        <hr>
+
+        <div class="jumbotron">
+            <%= render 'layouts/messages' %>
+            <%= yield %>			
         </div>
-      </div> <!--! end of .container -->
-    </div> <!--! end of #main -->
+
+        <hr>
+
+        <div class="footer">
+			© Built by <a href="http://5kmvp.com">5KMVP</a>
+        </div>
+
+      </div> <!-- /container -->	  	  
   </body>
 </html>
