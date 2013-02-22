@@ -1,4 +1,7 @@
 Boso::Application.routes.draw do
+  resources :tags
+
+
   get "home/index"
 
   authenticated :user do
