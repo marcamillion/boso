@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>So:</b>
+  <%= @question.so_id %>
+</p>
+
+<p>
+  <b>Creation date:</b>
+  <%= @question.creation_date %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @question.score %>
+</p>
+
+<p>
+  <b>Num answers:</b>
+  <%= @question.num_answers %>
+</p>
+
+<p>
+  <b>Accepted answer so:</b>
+  <%= @question.accepted_answer_so_id %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @question.title %>
+</p>
+
+<p>
+  <b>View count:</b>
+  <%= @question.view_count %>
+</p>
+
+<p>
+  <b>Link:</b>
+  <%= @question.link %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @question.body %>
+</p>
+
+<p>
+  <b>Answer count:</b>
+  <%= @question.answer_count %>
+</p>
+
+<p>
+  <b>Is answered:</b>
+  <%= @question.is_answered %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @question.owner %>
+</p>
+
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>

@@ -80,9 +80,5 @@ class TagsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  def import
-    @tags = Serel::Tag.pagesize(100).get          
-  end
-  
+    
 end

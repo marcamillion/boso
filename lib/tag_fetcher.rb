@@ -1,15 +1,12 @@
 module TagFetcher
 
-  def self.fetch_tags(num_results, page_num)
-    if num_results && page_num
-      @tags = Serel::Tag.pagesize(num_results).page(page_num).get
-    elsif num_results
-      @tags = Serel::Tag.pagesize(num_results).get
-    elsif page_num
-      @tags = Serel::Tag.pagesize(100).page(page_num).get
-    else
-      @tags = Serel::Tag.pagesize(100).get
-    end          
+  def self.fetch_tags(page_num)
+    tags = Serel::Tag.pagesize(100).page(page_num).get
   end
 
+  def self.find_tag(tagname)
+    #this is due to the tagname not being encoded and returning an error when parsing the tag 'c#'.
+    tagname.gsub!("c#", "c%23")
+    tag = Serel::Tag.find_by_name(tagname)
+  end
 end

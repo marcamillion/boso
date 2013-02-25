@@ -11,7 +11,51 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221220527) do
+ActiveRecord::Schema.define(:version => 20130225065443) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "so_id"
+    t.datetime "creation_date"
+    t.boolean  "is_accepted"
+    t.integer  "question_id"
+    t.string   "owner"
+    t.integer  "score"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.text     "body"
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+  add_index "answers", ["so_id"], :name => "index_answers_on_so_id"
+
+  create_table "questions", :force => true do |t|
+    t.integer  "so_id"
+    t.datetime "creation_date"
+    t.integer  "score"
+    t.integer  "accepted_answer_so_id"
+    t.string   "title"
+    t.integer  "view_count"
+    t.string   "link"
+    t.text     "body"
+    t.integer  "answer_count"
+    t.boolean  "is_answered"
+    t.string   "owner"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "accepted_answer_id"
+  end
+
+  add_index "questions", ["accepted_answer_so_id"], :name => "index_questions_on_accepted_answer_so_id"
+  add_index "questions", ["so_id"], :name => "index_questions_on_so_id"
+  add_index "questions", ["title"], :name => "index_questions_on_title"
+
+  create_table "questions_tags", :id => false, :force => true do |t|
+    t.integer "question_id"
+    t.integer "tag_id"
+  end
+
+  add_index "questions_tags", ["question_id"], :name => "index_questions_tags_on_question_id"
+  add_index "questions_tags", ["tag_id"], :name => "index_questions_tags_on_tag_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -30,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20130221220527) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

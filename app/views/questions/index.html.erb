@@ -1,0 +1,45 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>So</th>
+    <th>Creation date</th>
+    <th>Score</th>
+    <th>Num answers</th>
+    <th>Accepted answer so</th>
+    <th>Title</th>
+    <th>View count</th>
+    <th>Link</th>
+    <th>Body</th>
+    <th>Answer count</th>
+    <th>Is answered</th>
+    <th>Owner</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.so_id %></td>
+    <td><%= question.creation_date %></td>
+    <td><%= question.score %></td>
+    <td><%= question.num_answers %></td>
+    <td><%= question.accepted_answer_so_id %></td>
+    <td><%= question.title %></td>
+    <td><%= question.view_count %></td>
+    <td><%= question.link %></td>
+    <td><%= question.body %></td>
+    <td><%= question.answer_count %></td>
+    <td><%= question.is_answered %></td>
+    <td><%= question.owner %></td>
+    <td><%= link_to 'Show', question %></td>
+    <td><%= link_to 'Edit', edit_question_path(question) %></td>
+    <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Question', new_question_path %>

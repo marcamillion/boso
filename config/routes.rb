@@ -1,6 +1,8 @@
 Boso::Application.routes.draw do
-  resources :tags
 
+  resources :answers
+  resources :questions
+  resources :tags
 
   get "home/index"
 

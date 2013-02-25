@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>So:</b>
+  <%= @answer.so_id %>
+</p>
+
+<p>
+  <b>Creation date:</b>
+  <%= @answer.creation_date %>
+</p>
+
+<p>
+  <b>Is accepted:</b>
+  <%= @answer.is_accepted %>
+</p>
+
+<p>
+  <b>Question:</b>
+  <%= @answer.question_id %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @answer.owner %>
+</p>
+
+<p>
+  <b>Score:</b>
+  <%= @answer.score %>
+</p>
+
+
+<%= link_to 'Edit', edit_answer_path(@answer) %> |
+<%= link_to 'Back', answers_path %>

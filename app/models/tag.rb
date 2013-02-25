@@ -12,11 +12,21 @@
 class Tag < ActiveRecord::Base
   attr_accessible :name, :num_questions
   
-  def self.update_tags(num_results, page_num)
-    api_results = TagFetcher.fetch_tags(num_results, page_num)
-
-    api_results.each do |t|
-      Tag.where(:name => t.name).first_or_create(:num_questions => t.count)
+  has_and_belongs_to_many :questions
+  
+  def self.update_tags
+    i = 1
+    loop do
+      api_results = TagFetcher.fetch_tags(i)
+      api_results.each do |t|
+        Tag.where(:name => t.name).first_or_create(:num_questions => t.count)
+      end      
+      i += 1
+      break if api_results.empty?
     end
+  end
+  
+  def top_tags(num)
+    self.first(num)
   end
 end
