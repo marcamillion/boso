@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130225065443) do
+ActiveRecord::Schema.define(:version => 20130313043845) do
 
   create_table "answers", :force => true do |t|
     t.integer  "so_id"
@@ -54,8 +54,7 @@ ActiveRecord::Schema.define(:version => 20130225065443) do
     t.integer "tag_id"
   end
 
-  add_index "questions_tags", ["question_id"], :name => "index_questions_tags_on_question_id"
-  add_index "questions_tags", ["tag_id"], :name => "index_questions_tags_on_tag_id"
+  add_index "questions_tags", ["question_id", "tag_id"], :name => "by_question_and_tag", :unique => true
 
   create_table "roles", :force => true do |t|
     t.string   "name"

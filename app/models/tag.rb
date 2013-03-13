@@ -12,7 +12,7 @@
 class Tag < ActiveRecord::Base
   attr_accessible :name, :num_questions
   
-  has_and_belongs_to_many :questions
+  has_and_belongs_to_many :questions, uniq: true
   
   def self.update_tags
     i = 1

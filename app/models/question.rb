@@ -23,7 +23,11 @@ class Question < ActiveRecord::Base
   attr_accessible :accepted_answer_so_id, :answer_count, :body, :creation_date, :is_answered, :link, :owner, :score, :so_id, :title, :view_count
   
   has_many :answers
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, before_add: :validates_tag
+  
+  def validates_tag(tag)
+    raise ActiveRecord::Rollback if self.tags.include? tag
+  end
   
   def self.update_top_questions
     tags = []
@@ -38,6 +42,7 @@ class Question < ActiveRecord::Base
             end
             
             tags.each do |tag|
+              # Have to redo this tag_list addition because it keeps adding new tags to the existing array - you can see that by looking at the main page where the same tags are repeated for the top5 questions....so it is likely that the tags cascade.
               tag_list << Tag.where(:name => tag.name).first_or_create(:num_questions => tag.count)
             end
             
@@ -77,6 +82,14 @@ class Question < ActiveRecord::Base
     # add some code to update 
     # the top questions for a particular tag in the system
     
+  end
+  
+  def self.top_questions(num)
+    self.order("score DESC").first(num)
+  end
+  
+  def self.tagged_with(tag)
+    tags.where(:name => tag)
   end
   
 end
