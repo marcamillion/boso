@@ -16,6 +16,7 @@ group :development do
   gem "better_errors", ">= 0.6.0"
   gem "binding_of_caller", ">= 0.7.1"
   gem "awesome_print"  
+  gem "bullet"
 end
 
 group :test do
