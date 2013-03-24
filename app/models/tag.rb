@@ -14,6 +14,8 @@ class Tag < ActiveRecord::Base
   
   has_and_belongs_to_many :questions, uniq: true
   
+  default_scope order(:id)
+  
   def self.update_tags
     i = 1
     loop do

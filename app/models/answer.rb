@@ -18,4 +18,6 @@ class Answer < ActiveRecord::Base
   attr_accessible :creation_date, :is_accepted, :owner, :question_id, :score, :so_id, :body
   
   belongs_to :question
+  
+  default_scope order(:id)
 end

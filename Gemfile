@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.12'
-gem 'sqlite3'
+# gem 'sqlite3'
 gem 'serel'
 
 group :assets do
@@ -14,7 +14,8 @@ group :development do
   # gem 'sextant'  
   gem "quiet_assets", ">= 1.0.1"
   gem "better_errors", ">= 0.6.0"
-  gem "binding_of_caller", ">= 0.7.1"  
+  gem "binding_of_caller", ">= 0.7.1"
+  gem "awesome_print"  
 end
 
 group :test do
