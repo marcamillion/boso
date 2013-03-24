@@ -1,25 +1,15 @@
-<h1>Listing tags</h1>
+<h3 class="pagetitle">All Tags</h3>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Num questions</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<p>Tags are sorted in order of number of questions</p>
 
-<% @tags.each do |tag| %>
-  <tr>
-    <td><%= tag.name %></td>
-    <td><%= tag.num_questions %></td>
-    <td><%= link_to 'Show', tag %></td>
-    <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-    <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div class="row-fluid">			
+		<% @tags.in_groups_of(10, false) do |tags| %>
+			<% tags.each do |tag| %>
+			<div class="span1">
+				<%= link_to "#{tag.name} (#{tag.num_questions})", tag.name %>
+			</div>				
+			<% end %>
+		<% end %>
+</div>
 
-<br />
 
-<%= link_to 'New Tag', new_tag_path %>

@@ -1,28 +1,32 @@
-<!-- <h1>Top 5 Questions</h1> -->
-<%# @top_5_questions.each do |question| %>
-	<!-- Title: <%#= link_to question.title, question.link %><br />
-	Score: <%#= question.score %><br />
-	Num Answers: <%#= question.answer_count %><br />
-	Tags: <%# question.tags.each do |tag| %>
-			<%#= tag.name %>, 
-		  <%# end %>
-	<h3>Body</h3>
-	<%#= question.body %>
-	<hr>
-<%# end %> -->
-		
-		<% @questions.each do |question| %>
-			Title: <%= link_to question.title, question.link %><br />
-			Score: <%= question.score %><br />
-		Num Answers: <%= question.answer_count %><br />
-		Tags: <% question.tags.each do |tag| %>
-				<%= tag.name %>, 
-			  <% end %>
-		<h3>Body</h3>
-			<%= question.body %>
-		<hr>
-		<% end %>
+<% if params[:tag] %>
+	<h3 class="pagetitle"><%= "Top #{(params[:tag]).capitalize} Questions"%></h3>
+<% else %>
+	<h3 class="pagetitle">Top Questions on Stack Overflow</h3>
+<% end %>	
 
+<div class="container-narrow">		
+	<div class="row-fluid">	
+		<%= render 'layouts/sidebar'%>
+		
+			<%# @questions.in_groups_of(2, false) do |questions| %>
+				<%# questions.each do |question| %>
+				<% @questions.each do |question| %>
+				<div class="span9">
+					Title: <%= link_to question.title, question.link %><br />
+					Score: <%= question.score %><br />
+					Num Answers: <%= question.answer_count %><br />
+					Tags: <% question.tags.each do |tag| %>
+							<%= tag.name %>, 
+					  	  <% end %>
+				<h3>Body</h3>
+					<%= raw(question.body)%>
+					<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
+				</div>				
+				<% end %>
+			<%# end %>
+	</div>
+</div>
+<hr>
 	
   <!-- <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
   <a class="btn btn-large btn-success" href="#">Sign up today</a>

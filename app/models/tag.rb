@@ -14,8 +14,6 @@ class Tag < ActiveRecord::Base
   
   has_and_belongs_to_many :questions, uniq: true
   
-  default_scope order(:id)
-  
   def self.update_tags
     i = 1
     loop do
@@ -28,7 +26,16 @@ class Tag < ActiveRecord::Base
     end
   end
   
-  def top_tags(num)
-    self.first(num)
+  def self.top_tags(num)
+    order("num_questions DESC").limit(num)
   end
+  
+  def self.navigation_tags
+    nav_tags = []
+    ['ruby-on-rails', 'python', 'c++', 'java', 'iphone', 'android', 'javascript', 'c#', 'php', 'html5', 'css3', 'security', 'algorithm', 'regex', 'ajax'].each do |t|
+      nav_tags << Tag.where(:name => t).first
+    end
+    nav_tags
+  end
+  
 end

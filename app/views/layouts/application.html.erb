@@ -10,13 +10,10 @@
     <%= yield(:head) %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
-      <div class="container-narrow">
+      <div class="container-fluid">
         <div class="masthead">
-	          <%= render 'layouts/navigation' %>
-          <h3 class="muted"><%= link_to "BOSO", root_path, :class => 'brand' %></h3>
+         <%= render 'layouts/navigation' %>
         </div>
-
-        <hr>
 
         <div class="jumbotron">
             <%= render 'layouts/messages' %>
