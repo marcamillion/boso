@@ -25,8 +25,6 @@ class Question < ActiveRecord::Base
   has_many :answers, :dependent => :destroy
   has_and_belongs_to_many :tags, before_add: :validates_tag
   
-  default_scope order(:id)
-  
   def validates_tag(tag)
     self.tags.include? tag
   end
@@ -36,7 +34,8 @@ class Question < ActiveRecord::Base
     tag_list = []
     answer_list = []
     i = 1
-    12.times do
+    1.times do
+    # 12.times do
       api_results = QuestionFetcher.fetch_top_questions(i)
         api_results.each do |q|
           
@@ -134,12 +133,16 @@ class Question < ActiveRecord::Base
     
   end
   
+  def self.first
+    order(:id).limit(1)
+  end
+  
   def self.top_questions(num)
-    self.order("score DESC").first(num)
+    order("score DESC").first(num)
   end
   
   def self.tagged_with(tag)
-    tags.where(:name => tag)
+      Tag.find_by_name!(tag).questions.order("score DESC")
   end
   
   def trim_answer_numbers

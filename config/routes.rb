@@ -2,9 +2,10 @@ Boso::Application.routes.draw do
 
   resources :answers
   resources :questions
-  resources :tags
 
   get "home/index"
+  
+  get ':tag', to: 'home#index', as: :tag
 
   authenticated :user do
     root :to => 'home#index'

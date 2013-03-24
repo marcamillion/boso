@@ -1,18 +1,30 @@
-<h1>Top 5 Questions</h1>
-<% @top_5_questions.each do |question| %>
-	Title: <%= link_to question.title, question.link %><br />
-	Score: <%= question.score %><br />
-	Num Answers: <%= question.answer_count %><br />
-	Tags: <% question.tags.each do |tag| %>
-			<%= tag.name %>, 
-		  <% end %>
+<!-- <h1>Top 5 Questions</h1> -->
+<%# @top_5_questions.each do |question| %>
+	<!-- Title: <%#= link_to question.title, question.link %><br />
+	Score: <%#= question.score %><br />
+	Num Answers: <%#= question.answer_count %><br />
+	Tags: <%# question.tags.each do |tag| %>
+			<%#= tag.name %>, 
+		  <%# end %>
 	<h3>Body</h3>
-	<%= question.body %>
+	<%#= question.body %>
 	<hr>
-<% end %>
+<%# end %> -->
+		
+		<% @questions.each do |question| %>
+			Title: <%= link_to question.title, question.link %><br />
+			Score: <%= question.score %><br />
+		Num Answers: <%= question.answer_count %><br />
+		Tags: <% question.tags.each do |tag| %>
+				<%= tag.name %>, 
+			  <% end %>
+		<h3>Body</h3>
+			<%= question.body %>
+		<hr>
+		<% end %>
 
 	
-  <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+  <!-- <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
   <a class="btn btn-large btn-success" href="#">Sign up today</a>
 </div>
 
@@ -40,4 +52,4 @@
     <h4>Subheading</h4>
     <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
   </div>
-</div>
+</div> -->
