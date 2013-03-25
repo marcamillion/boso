@@ -1,10 +1,8 @@
 <div class="span3 taglist">
 	<span>List of Tags</span>
 	<ul>
-		<li>Tag 1</li>
-		<li>Tag 1</li>
-		<li>Tag 1</li>
-		<li>Tag 1</li>
-		<li>Tag 1</li>
+	 <% Tag.order(:name).all.each do |tag| %>
+		<li><%= link_to tag.name, tag.name %>
+	 <% end %>	
 	</ul>								
 </div>
