@@ -2,9 +2,9 @@ class HomeController < ApplicationController
   def index
     
     if params[:tag]
-      @questions = Question.tagged_with(params[:tag]).includes(:tags)
+      @questions = Question.paginate(:page => params[:page]).tagged_with(params[:tag]).includes(:tags).order("score DESC")
     else
-      @questions = Question.includes(:tags).top_questions(30)
+      @questions = Question.paginate(:page => params[:page]).includes(:tags).order("score DESC")
     end
 
     # @top_5_questions = Question.top_questions(5)

@@ -11,19 +11,23 @@
 #  view_count            :integer
 #  link                  :string(255)
 #  body                  :text
-#  answer_count          :integer
+#  so_answers_count       :integer
 #  is_answered           :boolean
 #  owner                 :string(255)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  accepted_answer_id    :integer
+#  answers_count         :integer          default(0), not null
 #
 
 class Question < ActiveRecord::Base
-  attr_accessible :accepted_answer_so_id, :answer_count, :body, :creation_date, :is_answered, :link, :owner, :score, :so_id, :title, :view_count
+  attr_accessible :accepted_answer_so_id, :so_answers_count, :body, :creation_date, :is_answered, :link, :owner, :score, :so_id, :title, :view_count, :answers_count
   
   has_many :answers, :dependent => :destroy
   has_and_belongs_to_many :tags, before_add: :validates_tag
+  
+  after_create :incrememnt_tags_counter
+  after_destroy :decrement_tags_counter  
   
   def validates_tag(tag)
     self.tags.include? tag
@@ -82,7 +86,7 @@ class Question < ActiveRecord::Base
               question.view_count = q.view_count 
               question.link = q.link 
               question.body = q.body
-              question.answer_count = q.answer_count
+              question.answers_count = q.answers_count
               question.is_answered = q.is_answered
               question.owner = q.owner.display_name
               question.tags << tag_list
@@ -90,7 +94,7 @@ class Question < ActiveRecord::Base
             end
 
             
-            qq.update_attributes(score: q.score, view_count: q.view_count, answer_count: q.answer_count, is_answered: q.is_answered)
+            qq.update_attributes(score: q.score, view_count: q.view_count, answers_count: q.answers_count, is_answered: q.is_answered)
             qq.tags.replace(tag_list)
             
             puts "*" * 20 + "BEFORE # qq.answers UPDATE" + "*" * 20
@@ -133,8 +137,8 @@ class Question < ActiveRecord::Base
     
   end
   
-  def self.first
-    order(:id).limit(1)
+  def self.first(num)
+    order(:id).limit(num)
   end
   
   def self.top_questions(num)
@@ -152,6 +156,29 @@ class Question < ActiveRecord::Base
     self.answers << accepted_answer
   end
   
+  def increment_tags_counter
+    self.tags.each do |t|
+      Tag.find_by_name(t.name).questions_count += 1
+    end
+  end
+
+  ## I haven't tested the callback on this, but it should work. What I am not 100% sure of is if the record is saved even
+  ## a destroy, such that we can call `self.tags` on that same record and it works. If it doesn't work, then this can just
+  ## be moved to a 'before_destroy'.
+
+  def decrement_tags_counter
+    self.tags.each do |t|
+      Tag.find_by_name(t.name).questions_count -= 1
+    end
+  end
+  
+  def self.reset_all_answers_counters
+    Question.all.each do |q|
+      Question.reset_counters(q.id, :answers)
+    end
+  end
+  
+    
   # def update_tags(tag_list)
   #   # This is one way to achieve it
   #   self.tags = self.tags && tag_list

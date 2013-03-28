@@ -1,3 +1,39 @@
 @import "bootstrap";
-body { padding-top: 10px; }
 @import "bootstrap-responsive";
+
+html, body {
+	height: 100%;
+}
+
+.container-fluid {
+	padding-left: 10px;
+	padding-right: 0px;
+}
+
+div.navbar-inner div.container ul.nav li.active a {
+	color: #F39C12;
+}
+
+div.navbar-inner div.container ul.nav li.active a:hover {
+	color: #F1C40F;
+}
+
+div.navbar-inner div.container ul.nav li a:hover {
+	color: #F1C40F;
+}
+
+.fivekmvp {
+	margin-top: 10px;
+//	margin-bottom: 5px;
+	text-align: center;
+	color: grey;
+	text-decoration: none;
+	font-size: 1.5em;
+}
+
+a.fivekmvp:hover {
+	color: #1ABC9C;
+	text-decoration: none;
+}
+
+

@@ -1,5 +1,5 @@
 <% if params[:tag] %>
-	<h3 class="pagetitle"><%= "Top #{(params[:tag]).capitalize} Questions"%></h3>
+	<h3 class="pagetitle"><%= "Top #{(params[:tag])} Questions"%></h3>
 <% else %>
 	<h3 class="pagetitle">Top Questions on Stack Overflow</h3>
 <% end %>	
@@ -7,6 +7,7 @@
 <div class="container-narrow">		
 	<div class="row-fluid">	
 		<%= render 'layouts/sidebar'%>
+		<div class="q-content">
 		
 			<%# @questions.in_groups_of(2, false) do |questions| %>
 				<%# questions.each do |question| %>
@@ -14,7 +15,7 @@
 				<div class="span9">
 					Title: <%= link_to question.title, question.link %><br />
 					Score: <%= question.score %><br />
-					Num Answers: <%= question.answer_count %><br />
+					Num Answers: <%= question.answers_count %><br />
 					Tags: <% question.tags.each do |tag| %>
 							<%= tag.name %>, 
 					  	  <% end %>
@@ -24,9 +25,12 @@
 				</div>				
 				<% end %>
 			<%# end %>
+		</div>
 	</div>
 </div>
 <hr>
+
+	<%= will_paginate @questions %>
 	
   <!-- <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
   <a class="btn btn-large btn-success" href="#">Sign up today</a>

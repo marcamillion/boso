@@ -11,12 +11,13 @@
 #  view_count            :integer
 #  link                  :string(255)
 #  body                  :text
-#  answer_count          :integer
+#  so_answers_count       :integer
 #  is_answered           :boolean
 #  owner                 :string(255)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  accepted_answer_id    :integer
+#  answers_count         :integer          default(0), not null
 #
 
 require 'spec_helper'

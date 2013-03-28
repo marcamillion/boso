@@ -3,14 +3,20 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 body {
-   padding-top: 20px;
-   padding-bottom: 40px;
+	padding-top: 20px;
+    padding-bottom: 40px;
+	padding-left: 0px;
+	padding-right: 0px;
+    margin: 0px;
  }
 
  /* Custom container */
  .container-narrow {
+   height: 100%;
+   width: 100%;
    margin: 0 auto;
-   max-width: 90%;
+   max-width: 100%;
+   display: table;
  }
  
  hr {
@@ -44,9 +50,41 @@ body {
   margin-top: 20px;
  }
  
- div.span3.taglist {
-	padding: 20px;
-	font-size: 20px;
+ .taglist, .q-content {
+	 display: table-cell;
+ }
+ 
+ .taglist {
+	font-size: 0.9em;
 	margin-top: -45px;
-	height: 45000px;
+	margin-left: 0px;
+	border-right: 1px solid #BDC3C7;
+}
+
+ .taglist ul {
+ 	text-align: left;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+}
+
+ .taglist ul li a {
+	 color: #3498DB;
+}
+
+ .taglist ul li a:hover {
+	 text-decoration: none;
+	 color: #2980B9;
+}
+
+.taglist .title {
+	text-align: center;
+	font-size: 1.5em;
+	color: #E74C3C;
+}
+
+.q-content {
+   background: white;
+   border: 0px;
+   padding-left: 20px;
 }

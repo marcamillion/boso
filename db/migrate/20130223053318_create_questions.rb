@@ -10,7 +10,7 @@ class CreateQuestions < ActiveRecord::Migration
       t.integer :view_count
       t.string :link
       t.text :body
-      t.integer :answer_count
+      t.integer :answers_count
       t.boolean :is_answered
       t.string :owner
 

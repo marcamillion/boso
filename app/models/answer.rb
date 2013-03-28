@@ -17,7 +17,8 @@
 class Answer < ActiveRecord::Base
   attr_accessible :creation_date, :is_accepted, :owner, :question_id, :score, :so_id, :body
   
-  belongs_to :question
+  belongs_to :question, counter_cache: true
   
   default_scope order(:id)
+    
 end

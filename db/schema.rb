@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313043845) do
+ActiveRecord::Schema.define(:version => 20130327123144) do
 
   create_table "answers", :force => true do |t|
     t.integer  "so_id"
@@ -37,12 +37,13 @@ ActiveRecord::Schema.define(:version => 20130313043845) do
     t.integer  "view_count"
     t.string   "link"
     t.text     "body"
-    t.integer  "answer_count"
+    t.integer  "so_answers_count"
     t.boolean  "is_answered"
     t.string   "owner"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
     t.integer  "accepted_answer_id"
+    t.integer  "answers_count",         :default => 0, :null => false
   end
 
   add_index "questions", ["accepted_answer_so_id"], :name => "index_questions_on_accepted_answer_so_id"
@@ -70,8 +71,9 @@ ActiveRecord::Schema.define(:version => 20130313043845) do
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.integer  "num_questions"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.integer  "questions_count", :default => 0, :null => false
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name"
