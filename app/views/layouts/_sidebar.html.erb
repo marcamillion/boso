@@ -2,8 +2,8 @@
 <div class="span2 taglist">
 	<span class="title">List of Tags</span>
 	<ul>
-	 <% Tag.order("num_questions DESC").first(100).each do |tag| %>
-		<li><%= link_to "#{tag.name} (#{tag.num_questions})", tag.name %></li>
+	 <% Tag.order("questions_count DESC").first(100).each do |tag| %>
+		<li><%= link_to "#{tag.name} (#{tag.questions_count})", tag.name %></li>
 	 <% end %>	
 	</ul>								
 </div>

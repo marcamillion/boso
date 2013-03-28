@@ -13,16 +13,20 @@
 				<%# questions.each do |question| %>
 				<% @questions.each do |question| %>
 				<div class="span9">
-					Title: <%= link_to question.title, question.link %><br />
+					Title: <%= link_to question.title.html_safe, question.link %><br />
 					Score: <%= question.score %><br />
 					Num Answers: <%= question.answers_count %><br />
 					Tags: <% question.tags.each do |tag| %>
 							<%= tag.name %>, 
 					  	  <% end %>
 				<h3>Body</h3>
-					<%= raw Pygments.highlight(question.body) %>
-					<%#= raw(question.body)%>
-					<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
+					<div class="question-body">
+						<%= markdown question.body %>				
+						<%#= raw Pygments.highlight(question.body) %>
+						<%#= question.body %>
+						<%#= raw(question.body)%>
+						<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
+					</div>
 				</div>				
 				<% end %>
 			<%# end %>
