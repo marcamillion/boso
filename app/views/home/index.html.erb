@@ -20,7 +20,8 @@
 							<%= tag.name %>, 
 					  	  <% end %>
 				<h3>Body</h3>
-					<%= raw(question.body)%>
+					<%= raw Pygments.highlight(question.body) %>
+					<%#= raw(question.body)%>
 					<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
 				</div>				
 				<% end %>
