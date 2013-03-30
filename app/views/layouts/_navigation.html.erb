@@ -4,10 +4,10 @@
 			<%= link_to "BOSO", root_path, :class => 'brand' %>
             <ul class="nav">
 			  <% Tag.navigation_tags.each do |tag| %>			  	
-				  <% if params[:tag] == tag.name %>
-				  	  <li class="active"><%= link_to tag.name, tag.name %></li>
+				  <% if params[:id] == tag.name %>
+				  	  <li class="active"><%= link_to tag.name, url_for(tag) %></li>
 				  <% else %>
-					  <li><%= link_to tag.name, tag.name %></li>
+					  <li><%= link_to tag.name, url_for(tag) %></li>
 				  <% end %>
 			  <% end %>
 			</ul>

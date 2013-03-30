@@ -14,6 +14,8 @@ class TagsController < ApplicationController
   # GET /tags/1.json
   def show
     @tag = Tag.find(params[:id])
+    @questions = @tag.questions.paginate(:page => params[:page]).includes(:tags).order("score DESC")
+    # @questions = Question.paginate(:page => params[:page]).tagged_with(params[:tag]).includes(:tags).order("score DESC")
 
     respond_to do |format|
       format.html # show.html.erb

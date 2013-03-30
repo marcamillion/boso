@@ -1,37 +1,40 @@
-<% if params[:tag] %>
-	<h3 class="pagetitle"><%= "Top #{(params[:tag])} Questions"%></h3>
-<% else %>
-	<h3 class="pagetitle">Top Questions on Stack Overflow</h3>
-<% end %>	
+<div class="q-content">
 
-<div class="container-narrow">		
-	<div class="row-fluid">	
-		<%= render 'layouts/sidebar'%>
-		<div class="q-content">
-		
-			<%# @questions.in_groups_of(2, false) do |questions| %>
-				<%# questions.each do |question| %>
-				<% @questions.each do |question| %>
-				<div class="span9">
-					Title: <%= link_to question.title.html_safe, question.link %><br />
-					Score: <%= question.score %><br />
-					Num Answers: <%= question.answers_count %><br />
-					Tags: <% question.tags.each do |tag| %>
-							<%= tag.name %>, 
-					  	  <% end %>
-				<h3>Body</h3>
-					<div class="question-body">
-						<%= markdown question.body %>				
-						<%#= raw Pygments.highlight(question.body) %>
-						<%#= question.body %>
-						<%#= raw(question.body)%>
-						<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
+	<%# @questions.in_groups_of(2, false) do |questions| %>
+		<%# questions.each do |question| %>
+		<% @questions.each do |question| %>
+		<div class="span9">
+			<div class="q-meta">
+				<div class="row-fluid">
+					<div class="span3"><i class="icon-arrow-up icon-white"></i></div>
+					<div class="score span9"><%= question.score %></div>
+				</div>
+				<div class="row-fluid">
+					<div class="span3"><i class="icon-tags icon-white"></i></div>
+					<div class="tags span9">
+						<% question.tags.each do |tag| %>
+							<% if tag == question.tags.last %>
+								<%= link_to "#{tag.name}", url_for(tag) %>
+							<% else %>
+								<%= link_to "#{tag.name}", url_for(tag) %>,
+							<% end%>
+							<!-- <%#= tag.name %>, -->
+						<% end %>	
 					</div>
-				</div>				
-				<% end %>
-			<%# end %>
-		</div>
-	</div>
+				</div>
+			</div>
+			Title: <%= link_to question.title.html_safe, question.link %><br />
+		<h3>Body</h3>
+			<div class="question-body">
+				<%= markdown question.body %>				
+				<%#= raw Pygments.highlight(question.body) %>
+				<%#= question.body %>
+				<%#= raw(question.body)%>
+				<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
+			</div>
+		</div>				
+		<% end %>
+	<%# end %>
 </div>
 <hr>
 

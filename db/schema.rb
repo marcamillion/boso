@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(:version => 20130327123144) do
     t.integer  "view_count"
     t.string   "link"
     t.text     "body"
-    t.integer  "so_answers_count"
+    t.integer  "so_answer_count"
     t.boolean  "is_answered"
     t.string   "owner"
     t.datetime "created_at",                           :null => false

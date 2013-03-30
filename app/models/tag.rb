@@ -15,6 +15,9 @@ class Tag < ActiveRecord::Base
   
   has_and_belongs_to_many :questions, uniq: true
   
+  extend FriendlyId
+  friendly_id :name#, use: :slugged
+  
   def self.update_tags
     i = 1
     loop do

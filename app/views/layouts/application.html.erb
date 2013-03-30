@@ -17,7 +17,19 @@
 
         <div class="jumbotron">
             <%= render 'layouts/messages' %>
-            <%= yield %>			
+			<% if controller_name == "tags" %>
+				<h3 class="pagetitle"><%= "Top #{(params[:id])} Questions"%></h3>
+			<% else %>
+				<h3 class="pagetitle">Top Questions on Stack Overflow</h3>
+			<% end %>	
+
+			<div class="container-narrow">		
+				<div class="row-fluid">	
+					<%= render 'layouts/sidebar'%>
+					<%= yield %>
+				</div>
+			</div>
+						
         </div>
 
         <hr>
