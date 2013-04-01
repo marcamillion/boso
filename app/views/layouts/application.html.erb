@@ -38,6 +38,9 @@
 			© Built by <a href="http://5kmvp.com">5KMVP</a>
         </div>
 
-      </div> <!-- /container -->	  	  
+      </div> <!-- /container -->
+	  <% if Rails.env.development? %>
+		  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+	  <% end %>	  	  	  
   </body>
 </html>

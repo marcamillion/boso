@@ -11,7 +11,7 @@
 #  view_count            :integer
 #  link                  :string(255)
 #  body                  :text
-#  so_answers_count       :integer
+#  so_answer_count       :integer
 #  is_answered           :boolean
 #  owner                 :string(255)
 #  created_at            :datetime         not null
@@ -21,7 +21,7 @@
 #
 
 class Question < ActiveRecord::Base
-  attr_accessible :accepted_answer_so_id, :so_answers_count, :body, :creation_date, :is_answered, :link, :owner, :score, :so_id, :title, :view_count, :answers_count
+  attr_accessible :accepted_answer_so_id, :so_answer_count, :body, :creation_date, :is_answered, :link, :owner, :score, :so_id, :title, :view_count, :answers_count, :accepted_answer_id
   
   has_many :answers, :dependent => :destroy
   has_and_belongs_to_many :tags, before_add: :validates_tag
@@ -37,7 +37,7 @@ class Question < ActiveRecord::Base
     tags = []
     tag_list = []
     answer_list = []
-    i = 1
+    i = 12
     1.times do
     # 12.times do
       api_results = QuestionFetcher.fetch_top_questions(i)
@@ -50,6 +50,10 @@ class Question < ActiveRecord::Base
             q.tags.each do |t|
               if t == 'logarithm'
                 tags << Tag.where(:name => 'logarithm')
+              elsif t == 'c#'
+                tags << Tag.where(:name => 'c#')
+              elsif t == 'c#-4.0'
+                tags << Tag.where(:name => 'c#-4.0')
               else
                 tags << TagFetcher.find_tag(t)
               end
@@ -67,7 +71,7 @@ class Question < ActiveRecord::Base
             ap tag_list
             puts "*" * 20 + "Tag_List" + "*" * 20            
             
-            answers = q.answers.filter(:withbody).pagesize(2).sort('votes').get
+            answers = q.answers.filter(:withbody).pagesize(1).sort('votes').get
             
             answers.each do |a|
               answer_list << Answer.where(:so_id => a.answer_id).first_or_create(:creation_date => a.creation_date, :is_accepted => a.is_accepted, :score => a.score, :owner => a.owner.display_name, :body => a.body)
@@ -94,7 +98,7 @@ class Question < ActiveRecord::Base
             end
 
             
-            qq.update_attributes(score: q.score, view_count: q.view_count, answers_count: q.answers_count, is_answered: q.is_answered)
+            qq.update_attributes(score: q.score, view_count: q.view_count, so_answer_count: q.answer_count, is_answered: q.is_answered)
             qq.tags.replace(tag_list)
             
             puts "*" * 20 + "BEFORE # qq.answers UPDATE" + "*" * 20
@@ -149,12 +153,19 @@ class Question < ActiveRecord::Base
       Tag.find_by_name!(tag).questions.order("score DESC")
   end
   
-  def trim_answer_numbers
-    accepted_answer = self.answers.where(:is_accepted => true)
-    top_answers = self.answers.order(:score).first(2)
-    self.answers.replace(top_answers)
-    self.answers << accepted_answer
+  def trim_answers
+    ## Need to do the case where no answers in db, even though there are answers on SO & no accepted_answer
+    if self.answers.where(is_accepted: true)
+      accepted_answer = self.answers.where(is_accepted: true)
+      self.answers.replace(accepted_answer)
+    else
+      top_answer = self.answers.order(:score).first(1).first      
+      self.answers.replace(top_answer)
+    end
+    # self.answers << accepted_answer
   end
+  
+  
   
   def increment_tags_counter
     self.tags.each do |t|
@@ -175,6 +186,37 @@ class Question < ActiveRecord::Base
   def self.reset_all_answers_counters
     Question.all.each do |q|
       Question.reset_counters(q.id, :answers)
+    end
+  end
+  
+  def selected_answer
+    Answer.find(self.accepted_answer_id)
+  end
+  
+  def displayed_answer
+    Answer.find_by_so_id(self.accepted_answer_so_id) || self.answers.order("score DESC").first
+  end
+  
+  def update_selected_answer
+    # Need to run this method on the set of questions that have a non nil value for 'accepted_answer_so_id'.
+    # i.e. on a collection returned by `Question.where("accepted_answer_so_id > 0")`
+
+    if Answer.find_by_so_id(self.accepted_answer_so_id)
+      self.update_attributes(accepted_answer_id: Answer.find_by_so_id(self.accepted_answer_so_id).id)
+    end
+  end
+  
+  def add_missing_answers
+    # Need to run this method on the set of questions that have a nil value for 'accepted_answer_id'.
+    # i.e. on a collection returned by `Question.where(:accepted_answer_id => nil)`
+    answers = []
+    
+    if self.answers_count == 0
+      answers = AnswerFetcher.fetch_top_answer(self.so_id)
+      answers.each do |a|
+        self.answers << Answer.where(:so_id => a.answer_id).first_or_create(:creation_date => a.creation_date, :is_accepted => a.is_accepted, :score => a.score, :owner => a.owner.display_name, :body => a.body)
+      end
+      Question.increment_counter(:answer_count, self.id)
     end
   end
   

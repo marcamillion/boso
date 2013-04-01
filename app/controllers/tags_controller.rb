@@ -13,14 +13,11 @@ class TagsController < ApplicationController
   # GET /tags/1
   # GET /tags/1.json
   def show
+    # ap logger.info request.env
     @tag = Tag.find(params[:id])
-    @questions = @tag.questions.paginate(:page => params[:page]).includes(:tags).order("score DESC")
-    # @questions = Question.paginate(:page => params[:page]).tagged_with(params[:tag]).includes(:tags).order("score DESC")
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @tag }
-    end
+    @questions = @tag.questions.paginate(:page => params[:page], :per_page => 10).includes(:tags).order("score DESC")
+    
+    render 'home/index'    
   end
 
   # GET /tags/new

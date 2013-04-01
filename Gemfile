@@ -31,6 +31,7 @@ end
 
 gem "jquery-rails"
 gem "thin", ">= 1.5.0"
+gem "font-awesome-sass-rails"
 gem "bootstrap-sass", ">= 2.3.0.0"
 gem "devise", ">= 2.2.3"
 gem "cancan", ">= 1.6.8"

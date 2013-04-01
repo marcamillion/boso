@@ -4,25 +4,18 @@ Boso::Application.routes.draw do
   resources :questions
 
   get "home/index"
-  # get 'tags', to: 'tags#index'
-  
-  # get ':tag', to: 'home#index', as: :tag
-  # match 'tags/:tag' => 'tags#show', as: ':tag'
-
-
+  devise_for :users
+  resources :users
 
   authenticated :user do
     root :to => 'home#index'
   end
+    
   root :to => "home#index"
-  devise_for :users
-  resources :users
   
+  resources :tags, path: "", except: [:index, :new, :create], constraints: { :id => /.*/ }  
+  # resources :tags, path: "", except: [:index, :new, :create], constraints: lambda{ |req| req.params[:id] != '/livereload' && req.params[:id] =~ /.*/ }  
+  # resources :tags, path: "", except: [:index, :new, :create], constraints: lambda{ |req| req.env['REQUEST_PATH'] != '/livereload' && req.params[:id] =~ /.*/ }
 
-  resources :tags, path: "", except: [:index, :new, :create], constraints: { :id => /.*/ }
-  # resources :tags, constraints: { :id => /.*/ }
-
-  # match '/:id' => 'tags#show'
-  # match "/tags/:id" => redirect("/%{id}")
   
 end

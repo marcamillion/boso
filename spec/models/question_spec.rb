@@ -11,7 +11,7 @@
 #  view_count            :integer
 #  link                  :string(255)
 #  body                  :text
-#  so_answers_count       :integer
+#  so_answer_count       :integer
 #  is_answered           :boolean
 #  owner                 :string(255)
 #  created_at            :datetime         not null

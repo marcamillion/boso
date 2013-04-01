@@ -5,7 +5,7 @@ module QuestionFetcher
   end
 
   def self.fetch_top_questions(page_num)
-    top_questions = Serel::Question.filter(:withbody).pagesize(50).page(page_num).sort('votes').get
+    top_questions = Serel::Question.filter(:withbody).pagesize(100).page(page_num).sort('votes').get
   end
   
 end

@@ -9,21 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ *= require _font-awesome
  *= require_tree .
 */
-
-.content {
-  background-color: #eee;
-  padding: 20px;
-  /* negative indent the amount of the padding to maintain the grid system */
-  margin: 0 -20px; 
-  -webkit-border-radius: 0 0 6px 6px;
-  -moz-border-radius: 0 0 6px 6px;
-  border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
-}
 
 .divider {
 	position:absolute;
@@ -31,28 +19,4 @@
 	top:10%;
 	bottom:0%;
 	border-left:1px solid #BDC3C7;
-}
-
-.q-meta {
-	padding: 10px;
-	width: 120px;
-	background-color: #4D576D;
-	border: 1px solid white;
-}
-
-.q-meta i {
-	size: 30px;
-}
-
-.q-meta .score {
-	padding: 0px;
-	margin: 0px;
-	font-size: 3em;
-	font-weight: bold;
-	color: #ACE1FE;
-}
-
-.q-meta .tags, .q-meta .tags a {
-	color: white;
-	font-size: 0.75em;
 }

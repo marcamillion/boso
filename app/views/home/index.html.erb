@@ -1,17 +1,17 @@
-<div class="q-content">
+<div class="q-content span10">
 
 	<%# @questions.in_groups_of(2, false) do |questions| %>
 		<%# questions.each do |question| %>
 		<% @questions.each do |question| %>
-		<div class="span9">
-			<div class="q-meta">
+		<div class="row">
+			<div class="q-meta span2">
 				<div class="row-fluid">
-					<div class="span3"><i class="icon-arrow-up icon-white"></i></div>
-					<div class="score span9"><%= question.score %></div>
+					<div class="span2"><i class="icon-arrow-up icon-large"></i></div>
+					<div class="score span10"><%= question.score %></div>
 				</div>
 				<div class="row-fluid">
-					<div class="span3"><i class="icon-tags icon-white"></i></div>
-					<div class="tags span9">
+					<div class="span2"><i class="icon-tags icon-large"></i></div>
+					<div class="tags span10">
 						<% question.tags.each do |tag| %>
 							<% if tag == question.tags.last %>
 								<%= link_to "#{tag.name}", url_for(tag) %>
@@ -21,18 +21,41 @@
 							<!-- <%#= tag.name %>, -->
 						<% end %>	
 					</div>
+				</div> <!-- //row-fluid -->
+				<div class="row-fluid">
+					<div class="span2"><i class="icon-user-md icon-large"></i></div>
+					<div class="owner span10"><%= question.owner %></div>
+				</div>				
+			</div> <!-- // q-meta span2 -->
+			<div class="q-title span10">
+				<div class="row-fluid">
+					<%= link_to question.title.html_safe, question.link, class: "q-headline" %>
+				</div>
+				<div class="row-fluid">
+					<div class="question-body">
+						<%= markdown question.body %>				
+						<%#= raw Pygments.highlight(question.body) %>
+						<%#= question.body %>
+						<%#= raw(question.body)%>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="answer-body">
+						<div class="answer-stats">
+							<% if question.is_answered? %>
+								<i class="icon-check"></i>														
+							<% end %>
+							<i class="icon-thumbs-up"></i>
+							<%= question.answers.first.score %>
+						</div>				
+						<%= markdown question.answers.first.body %>				
+						<%#= raw Pygments.highlight(question.body) %>
+						<%#= question.body %>
+						<%#= raw(question.body)%>
+					</div>
 				</div>
 			</div>
-			Title: <%= link_to question.title.html_safe, question.link %><br />
-		<h3>Body</h3>
-			<div class="question-body">
-				<%= markdown question.body %>				
-				<%#= raw Pygments.highlight(question.body) %>
-				<%#= question.body %>
-				<%#= raw(question.body)%>
-				<%#= raw(truncate(question.body, :length => 600, :omission => ' ... (see more)')) %>
-			</div>
-		</div>				
+		</div>
 		<% end %>
 	<%# end %>
 </div>
