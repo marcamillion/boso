@@ -224,6 +224,7 @@ DEPENDENCIES
   quiet_assets (>= 1.0.1)
   rack-mini-profiler
   rails (= 3.2.13)
+  redcarpet
   rolify (>= 3.2.0)
   rspec-rails (>= 2.12.2)
   sass-rails (~> 3.2.3)
