@@ -45,8 +45,7 @@
 							<% if question.is_answered? %>
 								<i class="icon-check"></i>														
 							<% end %>
-							<i class="icon-thumbs-up"></i>
-							<%= question.answers.first.score %>
+						Answered By: <%= question.answers.first.owner %> (<i class="icon-thumbs-up"></i> <%= question.answers.first.score %>)
 						</div>				
 						<%= markdown question.answers.first.body %>				
 						<%#= raw Pygments.highlight(question.body) %>

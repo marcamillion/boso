@@ -36,7 +36,7 @@ class Tag < ActiveRecord::Base
   
   def self.navigation_tags
     nav_tags = []
-    ['ruby-on-rails', 'python', 'c++', 'java', 'iphone', 'android', 'javascript', 'c#', 'php', 'html5', 'css3', 'security', 'algorithm', 'ajax'].each do |t|
+    ['ruby-on-rails', 'python', 'c++', 'java', 'iphone', 'android', 'javascript', 'c#', 'php', 'css3', 'algorithm'].each do |t|
       nav_tags << Tag.where(:name => t).first
     end
     nav_tags

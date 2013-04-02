@@ -9,6 +9,22 @@ html, body {
 	height: 100%;
 }
 
+body {
+	padding-top: 60px;
+}
+
+@media (min-width: 980px) { 
+	body { 
+		padding-top: 60px; 
+	}
+}
+
+@media (min-width: 1280px) { 
+	body { 
+		padding-top: 40px; 
+	}
+}
+
 .container-fluid {
 	padding-left: 10px;
 	padding-right: 0px;
@@ -27,9 +43,13 @@ div.navbar-inner div.container ul.nav li a:hover {
 }
 
 .fivekmvp {
-	margin-top: 10px;
-//	margin-bottom: 5px;
-	text-align: center;
+	height: auto;
+	padding: 10px 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0px 0px 0px -5px;
+	float: left;
+	display: inline;
 	color: grey;
 	text-decoration: none;
 	font-size: 1.5em;
@@ -39,5 +59,3 @@ a.fivekmvp:hover {
 	color: #1ABC9C;
 	text-decoration: none;
 }
-
-
