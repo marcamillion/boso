@@ -1,1 +1,0 @@
-Serel::Base.config(:stackoverflow, '25u8hEVqkiJoqyLD3AvSiQ((')
