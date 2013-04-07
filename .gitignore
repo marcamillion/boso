@@ -29,7 +29,6 @@ db/*.sqlite3
 .sass-cache
 /config/config.yml
 /config/database.yml
-/config/initializers/serel.rb
 /coverage.data
 /coverage/
 /db/*.javadb/
@@ -77,6 +76,7 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/config/initializers/serel.rb
 =======
 *.rbc
 *.sassc
@@ -91,6 +91,7 @@ capybara-*.html
 /public/system/*
 /coverage/
 /spec/tmp/*
+
 **.orig
 rerun.txt
 pickle-email-*.html
