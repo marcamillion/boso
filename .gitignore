@@ -28,6 +28,7 @@ db/*.sqlite3
 .redcar/
 .sass-cache
 /config/config.yml
+/config/initializers/serel.rb
 /config/database.yml
 /coverage.data
 /coverage/
@@ -76,7 +77,6 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
-/config/initializers/serel.rb
 =======
 *.rbc
 *.sassc
