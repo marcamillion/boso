@@ -37,9 +37,8 @@ class Question < ActiveRecord::Base
     tags = []
     tag_list = []
     answer_list = []
-    i = 12
-    1.times do
-    # 12.times do
+    i = 1
+    20.times do
       api_results = QuestionFetcher.fetch_top_questions(i)
         api_results.each do |q|
           
