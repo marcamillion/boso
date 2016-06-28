@@ -46,3 +46,4 @@ gem "will_paginate", "~> 3.0"
 gem "redcarpet"
 gem "friendly_id"
 gem "newrelic_rpm"
+gem 'rdoc', '~> 3.4'
