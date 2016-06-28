@@ -31,7 +31,7 @@ group :development, :test do
 end
 
 gem "jquery-rails"
-gem "thin", ">= 1.5.0"
+gem 'thin', '~> 1.6', '>= 1.6.4'
 gem "font-awesome-sass-rails"
 gem "bootstrap-sass", ">= 2.3.0.0"
 gem "devise", ">= 2.2.3"
