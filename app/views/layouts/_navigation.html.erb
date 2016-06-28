@@ -2,8 +2,9 @@
       <div class="navbar-inner">
         <div class="container">
 			<%= link_to "BOSO", root_path, :class => 'brand' %>
+      <%= link_to "Refactor Me", "https://refactormeplz.com", class: "fivekmvp" %>
             <ul class="nav">
-			  <% Tag.navigation_tags.each do |tag| %>			  	
+			  <% Tag.navigation_tags.each do |tag| %>
 				  <% if params[:id] == tag.name %>
 				  	  <li class="active"><%= link_to tag.name, url_for(tag) %></li>
 				  <% else %>
@@ -11,7 +12,7 @@
 				  <% end %>
 			  <% end %>
 			</ul>
-			<%= link_to "5KMVP", "http://www.5kmvp.com", class: "fivekmvp" %>
+      <%= link_to "5KMVP", "http://www.5kmvp.com", class: "fivekmvp" %>
         </div>
       </div>
    </div>
