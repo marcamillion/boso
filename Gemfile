@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
+# gem 'rails', '3.2.13'
+gem 'rails', '~> 3.2', '>= 3.2.22.2'
 gem 'serel'
 
 group :assets do
@@ -10,12 +11,12 @@ group :assets do
 end
 
 group :development do
-	gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'  
-  # gem 'sextant'  
+	gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  # gem 'sextant'
   gem "quiet_assets", ">= 1.0.1"
   gem "better_errors", ">= 0.6.0"
   gem "binding_of_caller", ">= 0.7.1"
-  gem "awesome_print"  
+  gem "awesome_print"
   gem "bullet"
 end
 
